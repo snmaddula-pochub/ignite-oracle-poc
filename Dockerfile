@@ -11,4 +11,4 @@ RUN mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DartifactId
 RUN mvn clean package -DskipTests
 
 ENTRYPOINT ["java", "-jar", "/ignite-oracle-poc/target/ignite-server.jar"]
-EXPOSE 11211
+EXPOSE 10800
