@@ -10,5 +10,5 @@ WORKDIR "/ignite-oracle-poc"
 
 RUN mvn clean package -DskipTests
 
-ENTRYPOINT ["java", "-jar", "/opt/spring-cloud/lib/spring-cloud-config-server.jar"]
+ENTRYPOINT ["java", "-jar", "/ignite-oracle-poc/target/ignite-oracle-poc-*.jar"]
 EXPOSE 11211
