@@ -1,27 +1,14 @@
 # Start from GridGain Professional image.
-FROM gridgain/gridgain-pro:2.7.1
+FROM snmaddula/ubuntu-java
 
-# Set config uri for node.
-ENV CONFIG_URI hue-oracle-server.xml
 
-# Copy optional libs.
-ENV OPTION_LIBS ignite-rest-http
+RUN add-apt-repository ppa:andrei-pozolotin/maven3 -y && apt-get update && apt-get install maven3 -y
 
-# Update packages and install maven.
-RUN set -x \
-    && apk add --no-cache \
-        openjdk8
+RUN git clone -b https://github.com/snmaddula-pochub/ignite-oracle-poc.git
 
-RUN apk --update add \
-    maven \
-    && rm -rfv /var/cache/apk/*
+WORKDIR "/ignite-oracle-poc"
 
-# Append project to container.
-ADD . hue-oracle
+RUN mvn clean package -DskipTests
 
-# Build project in container.
-RUN mvn -f hue-oracle/pom.xml clean package -DskipTests
-
-# Copy project jars to node classpath.
-RUN mkdir $IGNITE_HOME/libs/hue-oracle && \
-   find hue-oracle/target -name "*.jar" -type f -exec cp {} $IGNITE_HOME/libs/hue-oracle \;
+ENTRYPOINT ["java", "-jar", "/opt/spring-cloud/lib/spring-cloud-config-server.jar"]
+EXPOSE 11211
