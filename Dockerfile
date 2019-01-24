@@ -8,7 +8,7 @@ ENV IGNITE_HOME="/ignite"
 
 ENV PATH="/ignite/bin:${PATH}"
 
-RUN "CD /ignite/bin && rm -f *.bat && chmod +x *.sh && mv control.sh control && sqlline.sh sqlline && rm ignite.sh"
+RUN "cd /ignite/bin && rm -f *.bat && chmod +x *.sh && mv control.sh control && sqlline.sh sqlline && rm ignite.sh"
 
 WORKDIR "/ignite-oracle-poc"
 
