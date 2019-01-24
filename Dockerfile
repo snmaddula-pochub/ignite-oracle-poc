@@ -12,8 +12,7 @@ ENV PATH="/ignite/bin:${PATH}"
 
 WORKDIR "/ignite-oracle-poc"
 
-#ENTRYPOINT ["java", "-jar", "/ignite-oracle-poc/ignite-server.jar"]
+ENTRYPOINT ["java", "-jar", "/ignite-oracle-poc/ignite-server.jar"]
 
-CMD `cd /ignite/bin && rm -f *.bat && chmod +x *.sh && mv control.sh control && sqlline.sh sqlline && rm ignite.sh` && `java -jar ignite-server.jar &` && `sleep 15 && control --activate`
 
 EXPOSE 10800
